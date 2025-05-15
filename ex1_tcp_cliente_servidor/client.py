@@ -4,16 +4,15 @@
 import socket
 
 HOST = '127.0.0.1'
-PORTA = 50000
+PORT = 50000
 
-soquete = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-soquete.connect((HOST, PORTA)) # pedindo a conexão com o servirdor
-mensagem = input("Digite sua mensagem: ").strip()
-
-# garantindo uma mensagem válida
-if mensagem:
-    soquete.sendall(mensagem.encode()) # eviando mnsg para o sever e garantindo que chegue no formato correto
-    data = soquete.recv(1024)
-    print(f"Resposta: {data.decode()}") # exibindo que a conexão realemnte aconteceu
-else:
-    print("Mensagem vazia ou n enviada.")
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as soquete:
+    soquete.connect((HOST, PORT)) # pedindo a conexão com o servirdor
+    mensagem = input("digite sua mensagem: ").strip()
+    # garantindo uma mensagem válida
+    if mensagem:
+        soquete.sendall(mensagem.encode()) # eviando mnsg para o sever e garantindo que chegue no formato correto
+        data = soquete.recv(1024)
+        print(f"resposta: {data.decode()}") # exibindo que a conexão realemnte aconteceu
+    else:
+        print("mensagem vazia ou n enviada")
