@@ -5,7 +5,7 @@ import socket
 import threading
 
 HOST = '127.0.0.1'
-PORT = 50001
+PORT = 51000
 
 def recebe_mensagens(sock):
     while True:
@@ -21,7 +21,7 @@ def recebe_mensagens(sock):
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as soquete:
     soquete.connect((HOST, PORT))
     # cria uma thread para receber mensagens do servidor, rodando a função recebe_mensagens
-    threading.Thread(target=recebe_mensagens, args=(s, ), daemon=True).start()
+    threading.Thread(target=recebe_mensagens, args=(soquete, ), daemon=True).start()
 
     while True:
         mensagem = input()

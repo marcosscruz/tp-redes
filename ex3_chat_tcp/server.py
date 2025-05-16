@@ -5,7 +5,7 @@ import socket
 import threading
 
 HOST = 'localhost'
-PORT = 50001
+PORT = 51000
 
 clientes = [] # lista para armazenar as conexões dos clientes
 
@@ -27,9 +27,9 @@ def manipula_client(conexao, endereco):
 
 # objeto soquete criado e garantido que o socket seja fechado automaticamente com uso do with
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as soquete:
-    soquete.blind((HOST, PORT))
+    soquete.bind((HOST, PORT))
     soquete.listen(2) # colocando o objeto no modo de escuta, permitindo até 2 conexões
-    print(f"ouvindo {PORT}")
+    print(f"ouvindo a porta: {PORT}")
     while len(clientes) < 2: # aceita conexão até que 2 clientes estejam conectados
         conexao, endereco = soquete.accept()
         clientes.append(conexao) # adiciona a conexão a lista de clientes 
