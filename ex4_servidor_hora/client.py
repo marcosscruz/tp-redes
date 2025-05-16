@@ -5,7 +5,7 @@ import threading
 import time
 
 # Define a função cliente_hora que conecta a um servidor para receber a hora atual.
-def cliente_hora(host='localhost', port=700): # Define o host (endereço) e a porta padrão
+def cliente_hora(host='localhost', port=7000): # Define o host (endereço) e a porta padrão
     try: # Inicia um bloco try para capturar e tratar erros de conexão
 
         # Cria um socket TCP/IP (AF_INET = IPv4, SOCK_STREAM = TCP)
@@ -17,7 +17,7 @@ def cliente_hora(host='localhost', port=700): # Define o host (endereço) e a po
 
             # Espera e recebe a resposta do servidor (até 1024 bytes), decodificando de bytes para string
             time_data = sock.recv(1024).decode('utf-8')  
-            print(f"Hora recebida do servidor: {time_data}") # Exibe a hora recebida no console
+            print(f"Hora recebida do servidor: {time_data}\n") # Exibe a hora recebida no console
 
     # Caso o servidor não esteja rodando ou recuse a conexão        
     except ConnectionRefusedError:
@@ -30,13 +30,14 @@ def cliente_hora(host='localhost', port=700): # Define o host (endereço) e a po
 def main():
     num_clientes = 5  # Número de clientes simultâneos a serem simulados
     threads = []  # Lista para armazenar as threads dos clientes
+    delays = [1, 2, 3, 4, 5] # definindo os intervalos entre uma mensagem e outra de forma cerscente
 
     # Cria e inicia as threads dos clientes
     for i in range(num_clientes):
-        thread = threading.Thread(target=cliente_hora, args=(i,))  # Cria uma thread para executar a função cliente_hora com o número do cliente
+        thread = threading.Thread(target=cliente_hora)  # Cria uma thread para executar a função cliente_hora com o número do cliente
         threads.append(thread)  # Adiciona a thread criada à lista de threads
         thread.start()  # Inicia a execução da thread (cliente se conecta ao servidor)
-        time.sleep(0.1)  # Aguarda 0.1 segundo antes de iniciar a próxima conexão para evitar sobrecarga instantânea no servidor
+        time.sleep(delays[i])  # Aguarda o segundo especificado antes de iniciar a próxima conexão de acordo com a lista delays
 
     # Aguarda todas as threads terminarem antes de encerrar o programa
     for thread in threads:

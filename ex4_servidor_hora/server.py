@@ -5,7 +5,7 @@ import threading  # Importa biblioteca para uso de threads (execução paralela)
 import datetime  # Importa biblioteca para pegar a hora atual
 
 HOST = '0.0.0.0'  # Escuta em todas as interfaces de rede disponíveis
-PORT = 700  # Porta escolhida para o servidor escutar
+PORT = 7000  # Porta escolhida para o servidor escutar
 
 # Função que lida com cada cliente individualmente
 def handle_client(conn, addr):
