@@ -1,11 +1,12 @@
-# Exercício 2: Cliente-Servidor (TCP)
+# Exercício 2: Servidor Echo (UDP)
 # INTEGRANTES: João Gabriel Barbosa Freire, João Vitor Almeida Silva e Marcos Vinicius Santos Cruz
 
 import socket
 
 # Configurações do cliente
 SERVER_IP = 'localhost'  # IP do servidor
-SERVER_PORT = 6000  # Porta do servidor com número elevado para não atrapalhar outras aplicações
+# Porta do servidor com número elevado para não atrapalhar outras aplicações
+SERVER_PORT = 6000
 MAX_SIZE = 65507  # Tamanho máximo UDP
 TIMEOUT = 1  # 1 segundo de timeout
 MAX_ATTEMPTS = 3  # Tentativas de reenvio
